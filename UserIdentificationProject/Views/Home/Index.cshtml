@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<html>
+<body>
+
+    <form>
+        <div class="form-group">
+            <label for="UserLogin">Login</label>
+            <input id="UserLogin" type="text" class="form-control" placeholder="ExampleLogin">
+        </div>
+        <div class="form-group">
+            <label for="TextArea">Write some text 150 character limit</label>
+            <textarea class="form-control" id="TextArea" rows="3" maxlength="150" onkeyup="countChar(this),
+        processKeyUp(event), dynamicTable()" onkeydown="processKeyDown(event)" placeholder="Type Here"></textarea>
+        </div>
+
+
+        <div class="form-group">
+            <div class="numbersofChar">150</div>
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-success float-right">Submit</button>
+        </div>
+        <div id="time" class="form-group">...</div>
+        <div id="counter" class="form-group">...</div>
+        <table id="myTable">
+            <tr>
+                <td>Row1 cell1</td>
+                <td>Row1 cell2</td>
+            </tr>
+            <tr>
+                <td>Row2 cell1</td>
+                <td>Row2 cell2</td>
+            </tr>
+            <tr>
+                <td>Row3 cell1</td>
+                <td>Row3 cell2</td>
+            </tr>
+        </table>
+        <br>
+        @*<table id="timeTable">
+            <thead>
+                <tr>
+                    <th>Consecutive keyDown events</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>First</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Footer</td>
+                </tr>
+            </tfoot>
+        </table>*@
+        <br />
+    </form>
+
+    <script src="~/js/TextFunctions.js"></script>
+
+</body>
+</html>
