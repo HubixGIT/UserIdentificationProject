@@ -10,22 +10,20 @@ function countChar(val) {
 
 var start = 0;
 var counter = 0;
-var delta = 0;
+var msTime = 0;
 function processKeyDown(e) {
     if (!start) {
         start = (new Date()).getTime();
     }
     ++counter;
     document.getElementById("counter").innerHTML = "Consecutive keyDown events: " + counter + "\n";
-    if (counter > 1) {
-
-    }
+    
 };
 
 function processKeyUp(e) {
     if (start != 0) {
-        delta = (new Date()).getTime() - start;
-        document.getElementById("time").innerHTML = "Time between first keyDown and keyUp: " + delta + " ms\n";
+        msTime = (new Date()).getTime() - start;
+        document.getElementById("time").innerHTML = "Time between first keyDown and keyUp: " + msTime + " ms\n";
     }
 
     start = 0;
@@ -41,8 +39,21 @@ function addRowCell() {
     var row = table.insertRow(0);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
-    cell1.innerHTML = counter + "";
-    cell2.innerHTML = delta;
+    cell1.innerHTML = counter;
+    cell2.innerHTML = msTime;
 
     counter = 0;
+};
+
+function saveData() {
+    var i=0;
+    const cntArr = [];
+    const timeArr = [];
+    cntArr[i] = counter;
+    timeArr[i] = msTime;
+    i++;
+}
+
+function mergeArrays() {
+
 }
