@@ -1,4 +1,68 @@
-﻿
+﻿const startTime = [];
+const time = [];
+const keys = [];
+var timesPressed = 0;
+var start = 0;
+var counter = 0;
+var repeat = false;
+const txt = document.getElementById("TextArea");
+const log = document.getElementById('log');
+const ms = document.getElementById('ms');
+
+txt.addEventListener('keydown', event => {
+    if (!event.repeat) {
+        timesPressed++;
+        if (timesPressed > 1) {
+            counter++;
+            startTime[counter] = (new Date()).getTime();
+            keys[counter] = event.key;
+            log.textContent += `${keys[counter]}        `;
+            ms.textContent += `${time[counter]}        `;
+            
+        }
+        else {
+            startTime[counter] = (new Date()).getTime();
+            keys[counter] = event.key;
+        }
+    }
+    else {
+        if (!repeat) {
+            start = (new Date()).getTime();
+        }
+        repeat = true;
+        keys[counter] = event.key;
+        time[counter] = 0;
+        log.textContent += `${keys[counter]}        `;
+        ms.textContent += `${time[counter]}        `;
+        document.getElementById("counter").innerHTML = "Counter" + counter + "\n";
+        counter++;
+    }
+});
+
+txt.addEventListener('keyup', event => {
+    if (repeat) {
+        counter--;
+        time[counter] = ((new Date()).getTime() - start);
+
+        log.textContent += `${keys[counter]}        `;
+        ms.textContent += `${time[counter]}        `;
+
+        repeat = false;
+        start = 0;
+    }
+    else {
+        time[counter] = ((new Date()).getTime() - startTime[counter]);
+
+        log.textContent += `${keys[counter]}        `;
+        ms.textContent += `${time[counter]}        `;
+
+        
+        counter++;
+        document.getElementById("counter").innerHTML = "Counter" + counter + "\n";
+    }
+    timesPressed = 0;
+});
+
 function countChar(val) {
     var len = val.value.length;
     if (len >= 151) {
@@ -7,53 +71,3 @@ function countChar(val) {
         $('.numbersofChar').text(150 - len);
     }
 };
-
-var start = 0;
-var counter = 0;
-var msTime = 0;
-function processKeyDown(e) {
-    if (!start) {
-        start = (new Date()).getTime();
-    }
-    ++counter;
-    document.getElementById("counter").innerHTML = "Consecutive keyDown events: " + counter + "\n";
-    
-};
-
-function processKeyUp(e) {
-    if (start != 0) {
-        msTime = (new Date()).getTime() - start;
-        document.getElementById("time").innerHTML = "Time between first keyDown and keyUp: " + msTime + " ms\n";
-    }
-
-    start = 0;
-
-    if (counter != 0) {
-        addRowCell();
-    }
-    
-};
-
-function addRowCell() {
-    var table = document.getElementById("myTable");
-    var row = table.insertRow(0);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    cell1.innerHTML = counter;
-    cell2.innerHTML = msTime;
-
-    counter = 0;
-};
-
-function saveData() {
-    var i=0;
-    const cntArr = [];
-    const timeArr = [];
-    cntArr[i] = counter;
-    timeArr[i] = msTime;
-    i++;
-}
-
-function mergeArrays() {
-
-}

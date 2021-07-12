@@ -7,8 +7,10 @@ namespace UserIdentificationProject.Models
 {
     public class HomeModel
     {
-        public int Id { get; set; }
-        public string Login { get; set; }
-        public int Time { get; set; }
+        public int ID { get; set; }
+        public string Login { get; set; } 
+        public string Znak { get; set; }
+        public int CzasPrzytrzymania { get; set; }
+        public int CzasDoNastepnegoZnaku { get; set; }
     }
 }
