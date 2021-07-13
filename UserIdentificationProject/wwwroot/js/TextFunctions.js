@@ -54,14 +54,19 @@ txt.addEventListener('keyup', event => {
         start = 0;
     }
     else {
-        time[counter] = ((new Date()).getTime() - startTime[counter]);
+        if (!savePosition) {
+            var savePosition = counter;
+        }
 
-        log.textContent += `${keys[counter]}        `;
-        ms.textContent += `${time[counter]}        `;
+        time[savePosition] = ((new Date()).getTime() - startTime[savePosition]);
 
-        
-        counter++;
+        log.textContent += `${keys[savePosition]}        `;
+        ms.textContent += `${time[savePosition]}        `;
+
         document.getElementById("counter").innerHTML = "Counter" + counter + "\n";
+
+        counter++;
+        savePosition = 0;
     }
     timesPressed = 0;
 });
@@ -79,3 +84,5 @@ function countChar(val) {
         $('.numbersofChar').text(150 - len);
     }
 };
+
+//https://github.com/TypingDNA/TypingDnaRecorder-JavaScript/blob/1dba218b3247b2358b75b95f65ea2a37ff74be0d/typingdna.js#L42
