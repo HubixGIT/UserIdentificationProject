@@ -1,25 +1,36 @@
-﻿@{
+﻿@model UserIdentificationProject.Models.SaveDataModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <html>
 <body>
 
-    <form>
+    <form asp-action="SaveData">
         <div class="form-group">
-            <label for="UserLogin">Login</label>
-            <input id="UserLogin" type="text" class="form-control" placeholder="ExampleLogin">
+            <label asp-for="Login">Login</label>
+            <input asp-for="Login" id="Login" type="text" class="form-control" placeholder="ExampleLogin">
         </div>
         <div class="form-group">
             <label for="TextArea">Write some text 150 character limit</label>
             <textarea class="form-control" id="TextArea" rows="3" maxlength="150" onkeyup="countChar(this)" placeholder="Type Here"></textarea>
-        </div>
-
-        <div class="form-group">
             <div class="numbersofChar">150</div>
         </div>
         <div class="form-group">
-            <button id="Submit" type="button" class="btn btn-success float-right">Submit</button>
+            <label asp-for="Znak">Znak</label>
+            <input asp-for="Znak" id="Znak" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label asp-for="CzasPrzytrzymania">CzasPrzytrzymania</label>
+            <input asp-for="CzasPrzytrzymania" id="Czasprzytrzymania" type="number" class="form-control">
+        </div>
+        <div class="form-group">
+            <label asp-for="CzasDoNastepnegoZnaku">CzasDoNastepnegoZnaku</label>
+            <input asp-for="CzasDoNastepnegoZnaku" id="CzasDoNastepnegoZnaku" type="number" class="form-control">
+        </div>
+        <div class="form-group">
+            <button id="Submit" type="button" class="btn btn-success float-right" onclick="showArray()">Submit</button>
         </div>
         <div id="time" class="form-group">...</div>
         <div id="counter" class="form-group">...</div>
@@ -30,6 +41,9 @@
         <p id="log"></p>
         <p id="ms"></p>
 
+        <pre id="arrPrint"></pre>
+
+        <pre id="arrPrint2"></pre>
 
     </form>
 

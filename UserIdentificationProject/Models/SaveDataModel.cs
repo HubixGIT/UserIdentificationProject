@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace UserIdentificationProject.Models
 {
-    public class HomeModel
+    public class SaveDataModel
     {
         public int ID { get; set; }
         public string Login { get; set; } 

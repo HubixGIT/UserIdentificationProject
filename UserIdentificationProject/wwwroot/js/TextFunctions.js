@@ -6,24 +6,26 @@ var start = 0;
 var counter = 0;
 var repeat = false;
 const txt = document.getElementById("TextArea");
-const log = document.getElementById('log');
-const ms = document.getElementById('ms');
+const char = document.getElementById('Znak');
+const msTime = document.getElementById('ms');
 
 txt.addEventListener('keydown', event => {
     if (!event.repeat) {
-        timesPressed++;
-        if (timesPressed > 1) {
-            counter++;
+        /*timesPressed++;*/
+        //if (timesPressed > 1) {
+        //    counter++;
+        //    startTime[counter] = (new Date()).getTime();
+        //    keys[counter] = event.key;
+        //    log.textContent += `${keys[counter]}        `;
+        //    ms.textContent += `${time[counter]}        `;
+
+        //}
+        /*else {*/
+        
             startTime[counter] = (new Date()).getTime();
             keys[counter] = event.key;
-            log.textContent += `${keys[counter]}        `;
-            ms.textContent += `${time[counter]}        `;
-            
-        }
-        else {
-            startTime[counter] = (new Date()).getTime();
-            keys[counter] = event.key;
-        }
+
+        /*}*/
     }
     else {
         if (!repeat) {
@@ -31,11 +33,12 @@ txt.addEventListener('keydown', event => {
         }
         repeat = true;
         keys[counter] = event.key;
-        time[counter] = 0;
+        time[counter] = null;
         log.textContent += `${keys[counter]}        `;
         ms.textContent += `${time[counter]}        `;
         document.getElementById("counter").innerHTML = "Counter" + counter + "\n";
         counter++;
+
     }
 });
 
@@ -63,6 +66,11 @@ txt.addEventListener('keyup', event => {
     timesPressed = 0;
 });
 
+function showArray() {
+    document.getElementById("arrPrint2").innerHTML = JSON.stringify(keys);
+    document.getElementById("arrPrint").innerHTML = JSON.stringify(time);
+    
+}
 function countChar(val) {
     var len = val.value.length;
     if (len >= 151) {
