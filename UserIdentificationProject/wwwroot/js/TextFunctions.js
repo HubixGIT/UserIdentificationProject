@@ -1,74 +1,46 @@
-﻿const startTime = [];
-const time = [];
-const keys = [];
-var timesPressed = 0;
-var start = 0;
-var counter = 0;
+﻿var startTime = 0;
+var time = 0;
+var keys = 0;
 var repeat = false;
 const txt = document.getElementById("TextArea");
 const char = document.getElementById('Znak');
 const msTime = document.getElementById('ms');
 
+    
 txt.addEventListener('keydown', event => {
     if (!event.repeat) {
-        /*timesPressed++;*/
-        //if (timesPressed > 1) {
-        //    counter++;
-        //    startTime[counter] = (new Date()).getTime();
-        //    keys[counter] = event.key;
-        //    log.textContent += `${keys[counter]}        `;
-        //    ms.textContent += `${time[counter]}        `;
-
-        //}
-        /*else {*/
-        
-            startTime[counter] = (new Date()).getTime();
-            keys[counter] = event.key;
-
-        /*}*/
+            startTime = (new Date()).getTime();
     }
     else {
         if (!repeat) {
             start = (new Date()).getTime();
         }
         repeat = true;
-        keys[counter] = event.key;
-        time[counter] = null;
-        log.textContent += `${keys[counter]}        `;
-        ms.textContent += `${time[counter]}        `;
-        document.getElementById("counter").innerHTML = "Counter" + counter + "\n";
-        counter++;
+        keys = event.key;
+        time = null;
 
+        log.textContent += `${keys}        `;
+        ms.textContent += `${time}        `;
     }
 });
 
 txt.addEventListener('keyup', event => {
     if (repeat) {
-        counter--;
-        time[counter] = ((new Date()).getTime() - start);
+        time = ((new Date()).getTime() - start);
 
-        log.textContent += `${keys[counter]}        `;
-        ms.textContent += `${time[counter]}        `;
+        log.textContent += `${keys}        `;
+        ms.textContent += `${time}        `;
 
         repeat = false;
         start = 0;
     }
     else {
-        if (!savePosition) {
-            var savePosition = counter;
-        }
+        keys = event.key;
+        time = ((new Date()).getTime() - startTime);
 
-        time[savePosition] = ((new Date()).getTime() - startTime[savePosition]);
-
-        log.textContent += `${keys[savePosition]}        `;
-        ms.textContent += `${time[savePosition]}        `;
-
-        document.getElementById("counter").innerHTML = "Counter" + counter + "\n";
-
-        counter++;
-        savePosition = 0;
+        log.textContent += `${keys}        `;
+        ms.textContent += `${time}        `;
     }
-    timesPressed = 0;
 });
 
 function showArray() {
@@ -76,6 +48,7 @@ function showArray() {
     document.getElementById("arrPrint").innerHTML = JSON.stringify(time);
     
 }
+
 function countChar(val) {
     var len = val.value.length;
     if (len >= 151) {
@@ -84,5 +57,3 @@ function countChar(val) {
         $('.numbersofChar').text(150 - len);
     }
 };
-
-//https://github.com/TypingDNA/TypingDnaRecorder-JavaScript/blob/1dba218b3247b2358b75b95f65ea2a37ff74be0d/typingdna.js#L42
