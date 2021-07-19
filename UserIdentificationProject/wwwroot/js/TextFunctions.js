@@ -8,7 +8,6 @@ var dataArr = [];
 const txt = document.getElementById("TextArea");
     
 txt.addEventListener('keydown', event => {  
-    if (!event.repeat) {
         var keyCode = event.keyCode;
         var t = startTime;
         startTime = (new Date()).getTime();
@@ -16,14 +15,12 @@ txt.addEventListener('keydown', event => {
         arr[keyCode] = 1;
         nextKeyTimeArr[keyCode] = nextKeyTime;
         startTimeArr[keyCode] = startTime;
-        lastKeyDown = keyCode;      
-    }
+        lastKeyDown = keyCode;
     
     if (keyCode == 16 || keyCode == 17 || keyCode == 20 || keyCode == 8 ||
         keyCode == 37 || keyCode == 38 || keyCode == 39 || keyCode == 40){
         keyASCIIArr[keyCode] = keyCode;
-    }
-    
+    }    
 });
 
 txt.addEventListener('keypress', event => {
