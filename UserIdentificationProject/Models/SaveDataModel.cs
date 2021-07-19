@@ -13,4 +13,9 @@ namespace UserIdentificationProject.Models
         public int NextKeyTime { get; set; }
         public string Login { get; set; }
     }
+
+    public class NewData
+    {
+        public List<SaveDataModel> data = new List<SaveDataModel>();
+    }
 }

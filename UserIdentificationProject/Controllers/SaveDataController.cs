@@ -12,9 +12,14 @@ namespace UserIdentificationProject.Controllers
     public class SaveDataController : Controller
     {
         
-        public JsonResult AjaxMethod(string[] function_param)
+        public string GetData(string function_param)
         {
-            return Json(function_param);
+            dynamic func_param = JsonConvert.DeserializeObject(function_param);
+
+            Console.WriteLine(func_param.login);
+
+            return null;
+            
         }
 
             [HttpPost]
