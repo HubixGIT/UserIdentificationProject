@@ -32,23 +32,19 @@ txt.addEventListener('keyup', event => {
     var ut = (new Date()).getTime();
     var key = event.key;
     var keyCode = event.keyCode;
-    var pressTime = 0;
+    var keyDownTime = 0;
     var nextKeyTime = 0;
     
     if (arr[keyCode] == 1) {
-        pressTime = ut - startTimeArr[keyCode];
+        keyDownTime = ut - startTimeArr[keyCode];
         nextKeyTime = nextKeyTimeArr[keyCode];
         var login = document.getElementById("Login").value;
         var keyASCII = keyASCIIArr[keyCode];
-        dataArr = { login, key, keyASCII, nextKeyTime, pressTime };
+        dataArr = { login, key, keyASCII, nextKeyTime, keyDownTime };
         sendData(dataArr);
         arr[keyCode] = 0;
     }
 });
-
-function showArray() {
-    document.getElementById("arrPrint2").innerHTML = JSON.stringify(dataArr);
-};
 
 var sendData = function (dataArr) {
     $.ajax({

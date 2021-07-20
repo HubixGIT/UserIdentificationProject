@@ -6,35 +6,32 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Data;
 using Newtonsoft.Json;
+using UserIdentificationProject.Data;
 
 namespace UserIdentificationProject.Controllers
 {
     public class SaveDataController : Controller
     {
-        
-        public string GetData(string function_param)
+        private readonly AppDBContext _db;
+
+        public SaveDataController(AppDBContext db)
+        {
+            _db = db;
+        }
+        public IActionResult GetData(string function_param)
         {
             dynamic func_param = JsonConvert.DeserializeObject(function_param);
-
-            Console.WriteLine(func_param.login);
-
-            return null;
-            
-        }
-
-            [HttpPost]
-            public IActionResult SaveData(SaveDataModel model)
+            SaveDataModel data = new SaveDataModel
             {
-                SaveDataModel data = new SaveDataModel
-                {
-                    Login = model.Login,
-                    Key = model.Key,
-                    PressTime = model.PressTime,
-                    NextKeyTime = model.NextKeyTime
-                };
+                Key = func_param.keyASCII,
+                NextKeyTime = func_param.nextKeyTime,
+                KeyDownTime = func_param.keyDownTime,
+                Login = func_param.login
+            };
 
-                return View();
-            }
-        
+            _db.Data.Add(data);
+            _db.SaveChanges();
+            return null;
+        }  
     }
 }
