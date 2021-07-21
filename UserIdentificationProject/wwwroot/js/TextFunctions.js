@@ -1,21 +1,28 @@
-﻿var startTime = (new Date()).getTime();
-var lastKeyDown = 0;
+﻿var lastKeyDown = 0;
 var keyASCIIArr = [];
+var startTime;
 var arr = [];
 var startTimeArr = [];
 var nextKeyTimeArr = [];
 var dataArr = [];
+var i = new Boolean(true);
 const txt = document.getElementById("TextArea");
     
-txt.addEventListener('keydown', event => {  
-        var keyCode = event.keyCode;
-        var t = startTime;
+txt.addEventListener('keydown', event => {
+    if (i == true) {
         startTime = (new Date()).getTime();
-        var nextKeyTime = startTime - t;
-        arr[keyCode] = 1;
-        nextKeyTimeArr[keyCode] = nextKeyTime;
-        startTimeArr[keyCode] = startTime;
-        lastKeyDown = keyCode;
+        i = false;
+    }
+    
+    var keyCode = event.keyCode;
+    var t = startTime;
+    startTime = (new Date()).getTime();
+    var nextKeyTime = startTime - t;
+    arr[keyCode] = 1;
+    nextKeyTimeArr[keyCode] = nextKeyTime;
+    startTimeArr[keyCode] = startTime;
+    lastKeyDown = keyCode;
+    
     
     if (keyCode == 16 || keyCode == 17 || keyCode == 20 || keyCode == 8 ||
         keyCode == 37 || keyCode == 38 || keyCode == 39 || keyCode == 40){
@@ -57,11 +64,11 @@ var sendData = function (dataArr) {
     });
 }
 
-function countChar(val) {
-    var len = val.value.length;
-    if (len >= 151) {
-        val.value = val.value.substring(0, 150);
-    } else {
-        $('.numbersofChar').text(150 - len);
-    }
-};
+//function countChar(val) {
+//    var len = val.value.length;
+//    if (len >= 151) {
+//        val.value = val.value.substring(0, 150);
+//    } else {
+//        $('.numbersofChar').text(150 - len);
+//    }
+//};
